@@ -1,0 +1,93 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .weather-container {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      width: 320px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 26px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      margin: 15px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .weather-info {
+      margin-top: 20px;
+    }
+    .weather-info h2 {
+      font-size: 22px;
+      color: #333;
+    }
+    .weather-info p {
+      font-size: 18px;
+      color: #666;
+    }
+    .weather-info span {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="weather-container">
+    <h1>Weather App</h1>
+
+    <!-- Weather Search Form (submitting to the weather API) -->
+    <form action="" method="POST" target="_blank">
+        {% csrf_token %}
+      <input type="text" name="city" placeholder="Enter city name" required />
+      <button type="submit">Get Weather</button>
+    </form>
+
+    <!-- Weather Information Section (this will be populated dynamically by the API response) -->
+     {% if data.country_code %}
+    <div class="weather-info" id="weather-info">
+      <h1>{{city}}</h1>
+      <p>country code : <span id ="country_code">{{data.country_code}}</span></p>
+      <p>Temperature: <span id="temp">{{data.temp}}</span></p>
+      <p>Pressure: <span id="pressure">{{data.pressure}}</span></p>
+      <p>Humidity: <span id="humidity">{{data.humidity}}</span>%</p> 
+    </div>
+    {% endif %}
+
+  </div>
+
+</body>
+</html>
